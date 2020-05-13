@@ -1,0 +1,60 @@
+language: java
+jdk:
+- oraclejdk11
+
+cache:
+  directories:
+  - $HOME/.m2
+
+env:
+  global:
+    - DEPLOYMENT_BRANCH="master"
+    - APPLICATION_NAME="<application_name>"
+    - VERSION_MAJOR_NUMBER=0
+    - VERSION_MINOR_NUMBER=1
+    - VERSION_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER
+    - APPLICATION_VERSION="$VERSION_MAJOR_NUMBER.$VERSION_MINOR_NUMBER.$VERSION_BUILD_NUMBER"
+    - WORKDIR="workdir"
+    - PACKAGEDIR="$WORKDIR/package"
+
+# To encrypt token for sonar use Travis CLI: 'travis encrypt <sonar_secret> -r <github_organization>/<github_repository>'
+addons:
+  sonarcloud:
+    organization: "<sonar_organization>"
+    token:
+      secure: "<encrypted_sonar_secret>"
+
+# Build and test phase will run on every push to the repository
+# Static code analysis runs only on builds issued for 'DEPLOYMENT_BRANCH' (both push and PR builds)
+# Version upgrade and GithubRelease deployment steps will trigger only after successful merge (push build) to deployment branch
+# 'GITHUB_TOKEN' should be added to environment variables in repository's Travis settings
+install: mvn dependency:resolve
+jobs:
+  include:
+    - stage: "Build And Test"
+      script: mvn clean test
+    - stage: "Version Number Upgrade"
+      script: bash .scripts/version-number-upgrade.sh
+      if: branch = env(DEPLOYMENT_BRANCH) 
+          AND type != pull_request
+    - stage: "Static Code Analysis"
+      script:
+        - mvn clean test jacoco:report sonar:sonar -Pcoverage
+        - bash <(curl -Ls https://coverage.codacy.com/get.sh)
+      if: branch = env(DEPLOYMENT_BRANCH)
+    - stage: "Deploy New Release"
+      script: 
+        - bash .scripts/build-binaries.sh
+        - bash .scripts/tag-release.sh
+        - TRAVIS_TAG=$APPLICATION_NAME-$APPLICATION_VERSION
+      deploy:
+        provider: releases
+        api_key: $GITHUB_TOKEN
+        skip_cleanup: true
+        file_glob: true
+        file: $PACKAGEDIR/*
+        on:
+          tags: true  
+          all_branches: true
+      if: branch = env(DEPLOYMENT_BRANCH)
+          AND type != pull_request

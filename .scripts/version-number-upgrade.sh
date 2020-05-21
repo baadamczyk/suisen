@@ -13,7 +13,7 @@ mvn versions:commit -q -B
 
 #Set new version in application properties
 newAppVersion=$APPLICATION_VERSION
-sed -i "s/\(<application_name>\.version.number=\).*\$/\1${newAppVersion}/" $MAIN_PROPERTY_FILE_REF
+sed -i "s/\(suisen\.version.number=\).*\$/\1${newAppVersion}/" $MAIN_PROPERTY_FILE_REF
 
 echo ">>> Pushing changes back to repository..."
 git add -A

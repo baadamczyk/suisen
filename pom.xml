@@ -42,7 +42,7 @@
     </properties>
 
     <build>
-        <finalName>application-jar-name</finalName>
+        <finalName>suisen</finalName>
         <defaultGoal>spring-boot:run</defaultGoal>
         <plugins>
             <plugin>

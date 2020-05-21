@@ -33,5 +33,5 @@ This file contains list of steps recommended to perform when using this reposito
 - [ ] change *README* file to match Your project
 - [ ] change <placeholders> in README file
 - [ ] Add *Travis*, *Codacy* and *Sonar* badges to Your Project's README file
-- [ ] change project license if *GNU GPL* doesn't suit Your needs
+- [x] change project license if *GNU GPL* doesn't suit Your needs
 

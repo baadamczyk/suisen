@@ -1,4 +1,4 @@
-package your.group.id.applicationname;
+package pl.baadamczyk.suisen;
 
 import java.io.Serializable;
 

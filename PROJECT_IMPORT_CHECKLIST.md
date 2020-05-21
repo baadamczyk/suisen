@@ -3,30 +3,30 @@
 This file contains list of steps recommended to perform when using this repository as a template for new project.
 
 ### Services
-- [ ] Activate project in Travis CI
-- [ ] Add *GITHUB_TOKEN* environment variable to Travis repository settings (token can be acquired in Your GitHub Account settings)
-- [ ] Activate project in Codacy
-- [ ] Add *CODACY_TOKEN* environment variable to Travis repository settings (token can be acquired on Codacy Sites)
-- [ ] Activate project on SonarCloud
-- [ ] Generate sonar secret and use Travis CLI to enrypt it. Paste it to the .travis.yml then
+- [x] Activate project in Travis CI
+- [x] Add *GITHUB_TOKEN* environment variable to Travis repository settings (token can be acquired in Your GitHub Account settings)
+- [x] Activate project in Codacy
+- [x] Add *CODACY_TOKEN* environment variable to Travis repository settings (token can be acquired on Codacy Sites)
+- [x] Activate project on SonarCloud
+- [x] Generate sonar secret and use Travis CLI to enrypt it. Paste it to the .travis.yml then
 
 ### Travis configuration file
-- [ ] set *APPLICATION_NAME* variable
+- [x] set *APPLICATION_NAME* variable
 
 ### Automatic deployment settings
-- [ ] set applicatio name in *.scripts/var.sh*
-- [ ] change file names in *executables* directory to match the values in *.scripts/var.sh* directory
+- [x] set applicatio name in *.scripts/var.sh*
+- [x] change file names in *executables* directory to match the values in *.scripts/var.sh* directory
 
 ### Project structure
-- [ ] rename main project package
-- [ ] set application name in *<appname>.version.number* property inside *application.properties* file
-- [ ] change *banner.txt* contents
+- [x] rename main project package
+- [x] set application name in *<appname>.version.number* property inside *application.properties* file
+- [x] change *banner.txt* contents
 
 ### POM file
-- [ ] change group.id
-- [ ] change artifactId
-- [ ] change Application Name
-- [ ] change sonar configuration (scm tag contents) to mach Your repository
+- [x] change group.id
+- [x] change artifactId
+- [x] change Application Name
+- [x] change sonar configuration (scm tag contents) to mach Your repository
 
 ### Recommended end steps
 - [ ] set up branch protection rules for *master* and *development* branches

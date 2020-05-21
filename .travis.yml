@@ -9,7 +9,7 @@ cache:
 env:
   global:
     - DEPLOYMENT_BRANCH="master"
-    - APPLICATION_NAME="<application_name>"
+    - APPLICATION_NAME="suisen"
     - VERSION_MAJOR_NUMBER=0
     - VERSION_MINOR_NUMBER=1
     - VERSION_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER
@@ -17,17 +17,12 @@ env:
     - WORKDIR="workdir"
     - PACKAGEDIR="$WORKDIR/package"
 
-# To encrypt token for sonar use Travis CLI: 'travis encrypt <sonar_secret> -r <github_organization>/<github_repository>'
 addons:
   sonarcloud:
-    organization: "<sonar_organization>"
+    organization: "baadamczyk-github"
     token:
-      secure: "<encrypted_sonar_secret>"
+      secure: "iSJ+FFmFGUbWy8zkOkT5EAufwDRbRlebnZ91VOfHJkDJ8pAHtsUXQqHCGpKDgqgHPth0dfYQSwuIXB6QQ1bkdHBDYd0mWWjLb5cKXrDNS7jtXiMXaoJDegbQZT0eEQ+fJXEjxwH8jSLNexKztsaKDYVz7or/FN5bQLEpEbKoamvA+OrTJTQU9LFhQ0woYLKVgVAgWf8EADD1mDYTugvOHNZt4C6NfndItiek8OZZYSJUVToOPxVJR+v8nBpl/VI9MlAwGa6awSlUctB5piZGyXjcXFEUSGKsGIJusDI2Vu0U71SaT/2GXiPJFKK3J72AQcPqh14YAe10fsSnbd4ImwGGVaPkOh8GW8vBpw3RcMMiXXhSil1xL9szCAHNDd1cdRV/KARkovcis8t5jSfKD5aCf2PnF3FYJD1zrVgrl36j8dbTXre3x++k7KL84F0KJD4/8b/ePF2jOobOAlnlGxo+3youhH7Vv2ltK6+Qr+yzNQADguWcUWXCF7KZllGwTMGm84Vo/Yuut/XemtHUcNzZ53FcVC82P3zzCcAcmj5Md8BhIwR8aP64ScZJmIg56X0j9iHf07c5l1Vd8ysKfjNioqNYF9pmqHVJXKttK9y3n25VXzO6M0geTrM3zFgKQcy59vObs02lEm9LdwR78js1BMqOd22OoYoEDyv1/38="
 
-# Build and test phase will run on every push to the repository
-# Static code analysis runs only on builds issued for 'DEPLOYMENT_BRANCH' (both push and PR builds)
-# Version upgrade and GithubRelease deployment steps will trigger only after successful merge (push build) to deployment branch
-# 'GITHUB_TOKEN' should be added to environment variables in repository's Travis settings
 install: mvn dependency:resolve
 jobs:
   include:

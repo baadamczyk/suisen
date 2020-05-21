@@ -1,4 +1,4 @@
-package your.group.id.applicationname;
+package pl.baadamczyk.suisen;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;

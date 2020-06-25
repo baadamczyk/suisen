@@ -3,7 +3,7 @@
     <groupId>pl.baadamczyk</groupId>
     <artifactId>suisen</artifactId>
     <name>Suisen</name>
-    <version>0.1.4</version>
+    <version>0.1.8</version>
     <packaging>jar</packaging>
 
     <parent>
